@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Egocentric Capture</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0d0d0d; color: #f0f0f0;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-start;
+    min-height: 100vh; padding: 24px 16px;
+  }
+  h1 { font-size: 1.6rem; letter-spacing: 2px; color: #aaa; margin-bottom: 6px; }
+  #session-id { font-size: 0.75rem; color: #555; margin-bottom: 24px; }
+
+  /* Status badge */
+  #status-badge {
+    font-size: 1.1rem; font-weight: 600;
+    padding: 10px 28px; border-radius: 30px;
+    margin-bottom: 20px; letter-spacing: 1px;
+    transition: background 0.3s, color 0.3s;
+  }
+  .badge-idle       { background: #222; color: #888; }
+  .badge-fov        { background: #1a3a5c; color: #5ab4ff; }
+  .badge-passed     { background: #0d3320; color: #3ddc84; }
+  .badge-failed     { background: #3a1010; color: #ff5555; }
+  .badge-recording  { background: #3a1a00; color: #ff9a3c; animation: pulse 1.2s infinite; }
+  .badge-converting { background: #1a1a3a; color: #9b8fff; }
+  .badge-complete   { background: #0d3320; color: #3ddc84; }
+  .badge-error      { background: #3a1010; color: #ff5555; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+  /* Message */
+  #message {
+    font-size: 0.85rem; color: #888; text-align: center;
+    max-width: 480px; min-height: 20px; margin-bottom: 20px;
+  }
+
+  /* FOV stream */
+  #fov-container {
+    width: 100%; max-width: 640px;
+    border: 2px solid #333; border-radius: 8px;
+    overflow: hidden; margin-bottom: 20px;
+    display: none;
+  }
+  #fov-container.visible { display: block; }
+  #fov-img { width: 100%; display: block; }
+
+  /* Progress bar */
+  #progress-bar-wrap {
+    width: 100%; max-width: 480px; height: 8px;
+    background: #222; border-radius: 4px;
+    margin-bottom: 24px; overflow: hidden;
+    display: none;
+  }
+  #progress-bar-wrap.visible { display: block; }
+  #progress-bar {
+    height: 100%; width: 0%; border-radius: 4px;
+    background: linear-gradient(90deg, #ff9a3c, #ff5e3a);
+    transition: width 0.5s;
+  }
+
+  /* Buttons */
+  .btn-row { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 16px; }
+  button {
+    padding: 14px 32px; font-size: 1rem; font-weight: 600;
+    border: none; border-radius: 8px; cursor: pointer;
+    letter-spacing: 0.5px; transition: opacity 0.2s, transform 0.1s;
+  }
+  button:active { transform: scale(0.97); }
+  button:disabled { opacity: 0.3; cursor: not-allowed; }
+  #btn-fov     { background: #1e6ab5; color: #fff; }
+  #btn-start   { background: #2a8c4a; color: #fff; }
+  #btn-stop    { background: #c0392b; color: #fff; }
+
+  /* Files list */
+  #files-list {
+    width: 100%; max-width: 480px;
+    background: #161616; border-radius: 8px;
+    padding: 16px; font-size: 0.78rem; color: #888;
+    display: none; margin-top: 8px;
+  }
+  #files-list.visible { display: block; }
+  #files-list h3 { color: #aaa; margin-bottom: 10px; font-size: 0.85rem; }
+  #files-list div { margin-bottom: 6px; word-break: break-all; }
+  #files-list span.label { color: #555; margin-right: 6px; }
+
+  /* Recording timer */
+  #timer {
+    font-size: 2.5rem; font-weight: 700; color: #ff9a3c;
+    letter-spacing: 3px; margin-bottom: 16px;
+    display: none;
+  }
+  #timer.visible { display: block; }
+</style>
+</head>
+<body>
+
+<h1>EGOCENTRIC CAPTURE</h1>
+<div id="session-id">—</div>
+
+<div id="status-badge" class="badge-idle">IDLE</div>
+<div id="message">Run FOV check before recording.</div>
+
+<div id="fov-container">
+  <img id="fov-img" src="" alt="FOV Check Feed">
+</div>
+
+<div id="timer">1:00</div>
+
+<div id="progress-bar-wrap">
+  <div id="progress-bar"></div>
+</div>
+
+<div class="btn-row">
+  <button id="btn-fov">🔍 FOV Check</button>
+  <button id="btn-start" disabled>▶ Start Recording</button>
+  <button id="btn-stop"  disabled>■ Stop</button>
+</div>
+
+<div id="files-list">
+  <h3>Session Files</h3>
+  <div id="files-content"></div>
+</div>
+
+<script>
+  const badge    = document.getElementById('status-badge');
+  const message  = document.getElementById('message');
+  const fovBox   = document.getElementById('fov-container');
+  const fovImg   = document.getElementById('fov-img');
+  const timer    = document.getElementById('timer');
+  const progWrap = document.getElementById('progress-bar-wrap');
+  const progBar  = document.getElementById('progress-bar');
+  const filesList= document.getElementById('files-list');
+  const filesContent = document.getElementById('files-content');
+  const sessionDiv = document.getElementById('session-id');
+
+  const btnFov   = document.getElementById('btn-fov');
+  const btnStart = document.getElementById('btn-start');
+  const btnStop  = document.getElementById('btn-stop');
+
+  let recInterval = null;
+  let recSeconds  = 60;
+
+  function applyState(s) {
+    // Badge
+    const badgeMap = {
+      idle: ['IDLE', 'badge-idle'],
+      fov_checking: ['FOV CHECK...', 'badge-fov'],
+      fov_passed:   ['FOV ✓ PASSED', 'badge-passed'],
+      fov_failed:   ['FOV ✗ FAILED', 'badge-failed'],
+      recording:    ['● RECORDING',  'badge-recording'],
+      converting:   ['CONVERTING...','badge-converting'],
+      complete:     ['✓ COMPLETE',   'badge-complete'],
+      error:        ['ERROR',        'badge-error'],
+    };
+    const [text, cls] = badgeMap[s.status] || ['UNKNOWN', 'badge-idle'];
+    badge.textContent = text;
+    badge.className   = 'badge-' + (s.status.replace('fov_','fov'));
+    badge.className   = `status-badge ${cls}`;  // keep id
+    badge.id = 'status-badge';
+    badge.className = cls;
+
+    message.textContent = s.message || '';
+
+    // FOV stream
+    if (s.status === 'fov_checking') {
+      fovBox.classList.add('visible');
+      fovImg.src = '/fov-stream?' + Date.now();
+    } else {
+      fovBox.classList.remove('visible');
+      fovImg.src = '';
+    }
+
+    // Timer
+    if (s.status === 'recording') {
+      timer.classList.add('visible');
+      if (!recInterval) {
+        recSeconds = 60;
+        updateTimer();
+        recInterval = setInterval(() => {
+          recSeconds--;
+          updateTimer();
+          if (recSeconds <= 0) clearInterval(recInterval);
+        }, 1000);
+      }
+    } else {
+      timer.classList.remove('visible');
+      if (recInterval) { clearInterval(recInterval); recInterval = null; }
+    }
+
+    // Progress bar (converting)
+    if (s.status === 'converting') {
+      progWrap.classList.add('visible');
+      // Animate indeterminate
+      progBar.style.width = '100%';
+      progBar.style.animation = 'indeterminate 1.5s infinite';
+    } else {
+      progWrap.classList.remove('visible');
+      progBar.style.animation = '';
+    }
+
+    // Buttons
+    btnFov.disabled   = ['recording','converting','fov_checking'].includes(s.status);
+    btnStart.disabled = s.status !== 'fov_passed';
+    btnStop.disabled  = s.status !== 'recording';
+
+    // Session ID
+    if (s.session_id) sessionDiv.textContent = 'Session: ' + s.session_id;
+
+    // Files
+    if (s.status === 'complete' && s.files) {
+      filesList.classList.add('visible');
+      let html = '';
+      const labels = {
+        bag:'BAG', color:'Orbbec Color', depth:'Orbbec Depth',
+        kreo1:'Kreo 1', kreo2:'Kreo 2', combined:'Combined', timestamps:'Timestamps'
+      };
+      try {
+        const files = typeof s.files === 'string' ? JSON.parse(s.files.replace(/'/g,'"')) : s.files;
+        for (const [k, v] of Object.entries(files)) {
+          if (v && v !== 'None') {
+            html += `<div><span class="label">${labels[k]||k}:</span>${v}</div>`;
+          }
+        }
+      } catch(e) { html = String(s.files); }
+      filesContent.innerHTML = html;
+    }
+  }
+
+  function updateTimer() {
+    const m = Math.floor(recSeconds/60).toString().padStart(1,'0');
+    const s = (recSeconds % 60).toString().padStart(2,'0');
+    timer.textContent = m + ':' + s;
+  }
+
+  // WebSocket
+  const ws = new WebSocket('ws://' + location.host + '/ws');
+  ws.onmessage = e => applyState(JSON.parse(e.data));
+  ws.onclose   = () => setTimeout(() => location.reload(), 2000);
+
+  // Buttons
+  btnFov.onclick   = () => fetch('/fov-check', {method:'POST'});
+  btnStart.onclick = () => fetch('/start',     {method:'POST'});
+  btnStop.onclick  = () => fetch('/stop',      {method:'POST'});
+
+  // Initial state
+  fetch('/status').then(r=>r.json()).then(applyState);
+</script>
+</body>
+</html>

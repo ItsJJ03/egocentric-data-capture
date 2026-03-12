@@ -1,0 +1,20 @@
+[Unit]
+Description=Egocentric Capture Daemon
+After=network.target local-fs.target
+Wants=local-fs.target
+
+[Service]
+Type=simple
+User=autonexai
+WorkingDirectory=/home/autonexai/OrbbecSDK_Pi5
+ExecStart=/usr/bin/python3 /home/autonexai/OrbbecSDK_Pi5/capture_daemon.py
+Restart=on-failure
+RestartSec=5
+Environment=LD_LIBRARY_PATH=/home/autonexai/OrbbecSDK_fresh/OrbbecSDK_v2.7.6_202602021228_d712cda_linux_arm64/lib
+Environment=QT_QPA_PLATFORM=offscreen
+Environment=DISPLAY=:0
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

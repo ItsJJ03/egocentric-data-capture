@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Orbbec SDK logs
+Log/
+
+# Recordings (large files, not for version control)
+/mnt/ssd/recordings/
+*.bag
+*.mp4
+
+# Env / secrets
+.env
+*.env
+
+# OS
+.DS_Store
+Thumbs.db
