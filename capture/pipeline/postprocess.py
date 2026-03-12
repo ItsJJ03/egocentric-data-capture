@@ -213,3 +213,79 @@ def make_combined(orbbec_color: str, orbbec_depth: str,
     writer.release()
     log.info(f"Combined done — {frame_n} frames -> {out_path}")
     return frame_n > 0
+
+
+# ── Bag → MCAP ───────────────────────────────────────────────────
+import json, base64 as _b64
+
+_COLOR_SCHEMA = json.dumps({"title":"foxglove.CompressedImage","$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"timestamp":{"type":"object"},"frame_id":{"type":"string"},"data":{"type":"string","contentEncoding":"base64"},"format":{"type":"string"}}})
+_DEPTH_SCHEMA = json.dumps({"title":"foxglove.RawImage","$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","properties":{"timestamp":{"type":"object"},"frame_id":{"type":"string"},"width":{"type":"integer"},"height":{"type":"integer"},"encoding":{"type":"string"},"step":{"type":"integer"},"data":{"type":"string","contentEncoding":"base64"}}})
+
+def convert_bag_to_mcap(bag_path: str, mcap_out: str, progress_cb=None) -> bool:
+    try:
+        from rosbags.rosbag1 import Reader
+        from mcap.writer import Writer as McapWriter
+    except ImportError as e:
+        log.error(f"Missing dependency: {e}"); return False
+
+    log.info(f"Converting bag → MCAP: {mcap_out}")
+    color_topic = depth_topic = None
+    color_n = depth_n = 0
+
+    try:
+        with Reader(str(bag_path)) as reader, open(mcap_out, "wb") as f:
+            writer = McapWriter(f)
+            writer.start(profile="", library="egocentric-capture")
+            color_schema_id = writer.register_schema(name="foxglove.CompressedImage", encoding="jsonschema", data=_COLOR_SCHEMA.encode())
+            depth_schema_id = writer.register_schema(name="foxglove.RawImage", encoding="jsonschema", data=_DEPTH_SCHEMA.encode())
+            color_ch_id = writer.register_channel(topic="/orbbec/color", message_encoding="json", schema_id=color_schema_id)
+            depth_ch_id = writer.register_channel(topic="/orbbec/depth", message_encoding="json", schema_id=depth_schema_id)
+
+            seen = set()
+            for conn, ts, data in reader.messages():
+                if conn.topic in seen or "Image" not in conn.msgtype: continue
+                seen.add(conn.topic)
+                w, h, enc, _ = parse_ros_image(data)
+                if enc is None: continue
+                if enc.upper() in ("MJPG","MJPEG","RGB8","BGR8") and not color_topic:
+                    color_topic = conn.topic; log.info(f"  Color: {conn.topic} ({enc})")
+                elif enc in ("mono16","16UC1","Y16") and not depth_topic:
+                    depth_topic = conn.topic; log.info(f"  Depth: {conn.topic} ({enc})")
+                if color_topic and depth_topic: break
+
+            if not color_topic and not depth_topic:
+                log.error("No image topics found in bag"); return False
+
+            for conn, ts_ns, data in reader.messages():
+                if conn.topic == color_topic:
+                    w, h, enc, img = parse_ros_image(data)
+                    if not img: continue
+                    if enc.upper() not in ("MJPG","MJPEG"):
+                        frame = cv2.cvtColor(np.frombuffer(img, np.uint8).reshape(h,w,3), cv2.COLOR_RGB2BGR)
+                        _, buf = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 85])
+                        img = buf.tobytes()
+                    msg = json.dumps({"timestamp":{"sec":ts_ns//1_000_000_000,"nsec":ts_ns%1_000_000_000},"frame_id":"orbbec_color","format":"jpeg","data":_b64.b64encode(img).decode()}).encode()
+                    writer.add_message(channel_id=color_ch_id, log_time=ts_ns, data=msg, publish_time=ts_ns)
+                    color_n += 1
+
+                elif conn.topic == depth_topic:
+                    w, h, enc, img = parse_ros_image(data)
+                    if not img or len(img) != w*h*2: continue
+                    msg = json.dumps({"timestamp":{"sec":ts_ns//1_000_000_000,"nsec":ts_ns%1_000_000_000},"frame_id":"orbbec_depth","width":w,"height":h,"encoding":"mono16","step":w*2,"data":_b64.b64encode(img).decode()}).encode()
+                    writer.add_message(channel_id=depth_ch_id, log_time=ts_ns, data=msg, publish_time=ts_ns)
+                    depth_n += 1
+
+                total = color_n + depth_n
+                if total % 300 == 0 and total > 0:
+                    log.info(f"  MCAP progress — Color: {color_n}  Depth: {depth_n}")
+                    if progress_cb: progress_cb(color_n, depth_n)
+
+            writer.finish()
+
+    except Exception as e:
+        log.error(f"MCAP conversion error: {e}")
+        import traceback; traceback.print_exc()
+        return False
+
+    log.info(f"Bag → MCAP done — Color: {color_n}  Depth: {depth_n} -> {mcap_out}")
+    return color_n > 0 or depth_n > 0

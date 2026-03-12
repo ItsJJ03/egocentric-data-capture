@@ -21,7 +21,7 @@ import uvicorn
 
 from capture.config import UI_HOST, UI_PORT, FOV_CHECK_SECS, FOV_MIN_DETECTION_FRAMES
 from capture.cameras.fov_check import FOVChecker, FOVResult
-from capture.pipeline.session  import CaptureSession
+from capture.pipeline.session_mcap import McapCaptureSession as CaptureSession
 
 log = logging.getLogger(__name__)
 app = FastAPI()
