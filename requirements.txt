@@ -1,0 +1,6 @@
+# requirements.txt
+ultralytics>=8.0.0
+boto3>=1.26.0
+numpy>=1.24.0
+# pyorbbecsdk — installed via OrbbecSDK, not pip
+# opencv-python — installed via apt or pip (optional, for HSV fallback)
