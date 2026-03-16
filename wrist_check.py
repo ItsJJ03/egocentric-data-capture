@@ -1,7 +1,6 @@
 # wrist_check.py — 5-second wrist presence check via YOLOv8n-pose on Orbbec color stream
 import time
 import logging
-import numpy as np
 import config
 
 log = logging.getLogger(__name__)
@@ -16,66 +15,53 @@ class WristChecker:
 
     def run(self) -> tuple[bool, float]:
         """
-        Stream Orbbec color for WRIST_CHECK_DURATION seconds.
+        Stream Orbbec color via V4L2 (cv2.VideoCapture) for WRIST_CHECK_DURATION seconds.
         Runs YOLO pose inference every YOLO_EVERY_N_FRAMES frames.
-        Returns (passed: bool, fraction: float) where fraction =
-        (frames with both wrists detected) / (total inferred frames).
+        Returns (passed: bool, fraction: float).
         """
-        try:
-            import pyorbbecsdk as ob
-        except ImportError:
-            log.error("[wrist_check] pyorbbecsdk not found — cannot run wrist check")
+        import cv2
+
+        # Find the Orbbec color device — try /dev/video0..4
+        cap = None
+        for idx in range(5):
+            c = cv2.VideoCapture(idx)
+            if c.isOpened():
+                cap = c
+                log.info(f"[wrist_check] Opened camera at /dev/video{idx}")
+                break
+            c.release()
+
+        if cap is None:
+            log.error("[wrist_check] No V4L2 camera found (tried /dev/video0-4)")
             return False, 0.0
 
-        pipeline = ob.Pipeline()
-        cfg      = ob.Config()
-
-        try:
-            profile_list  = pipeline.get_stream_profile_list(ob.OBSensorType.COLOR_SENSOR)
-            color_profile = profile_list.get_video_stream_profile(
-                config.ORBBEC_COLOR_WIDTH,
-                config.ORBBEC_COLOR_HEIGHT,
-                ob.OBFormat.RGB,
-                config.ORBBEC_COLOR_FPS,
-            )
-            cfg.enable_stream(color_profile)
-            pipeline.start(cfg)
-        except Exception as e:
-            log.error(f"[wrist_check] Orbbec pipeline start failed: {e}")
-            return False, 0.0
+        cap.set(cv2.CAP_PROP_FRAME_WIDTH,  config.ORBBEC_COLOR_WIDTH)
+        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, config.ORBBEC_COLOR_HEIGHT)
+        cap.set(cv2.CAP_PROP_FPS,          config.ORBBEC_COLOR_FPS)
+        cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)   # minimize latency
 
         total_inferred = 0
         both_wrists    = 0
         frame_idx      = 0
         deadline       = time.time() + config.WRIST_CHECK_DURATION
-        hsv_fallback_count = 0
 
-        log.info(f"[wrist_check] Running {config.WRIST_CHECK_DURATION}s check — show both wrists to camera...")
+        log.info(f"[wrist_check] Running {config.WRIST_CHECK_DURATION}s check — show both wrists to the Orbbec camera...")
 
         try:
             while time.time() < deadline:
-                frames = pipeline.wait_for_frames(100)
-                if frames is None:
-                    continue
-                color_frame = frames.get_color_frame()
-                if color_frame is None:
+                ret, frame = cap.read()
+                if not ret or frame is None:
                     continue
 
                 frame_idx += 1
                 if frame_idx % config.YOLO_EVERY_N_FRAMES != 0:
                     continue
 
-                # Build numpy array from frame buffer
-                raw  = np.frombuffer(color_frame.get_data(), dtype=np.uint8)
-                img  = raw.reshape((color_frame.get_height(), color_frame.get_width(), 3))
-
                 total_inferred += 1
-                detected = self._infer_wrists(img)
-
+                detected = self._infer_wrists(frame)
                 if detected:
                     both_wrists += 1
 
-                # Live progress bar
                 frac      = both_wrists / total_inferred if total_inferred else 0.0
                 remaining = max(0.0, deadline - time.time())
                 bar_len   = 20
@@ -85,13 +71,11 @@ class WristChecker:
                 print(
                     f"\r  [{bar}] {frac:5.1%}  {both_wrists}/{total_inferred} frames  "
                     f"{remaining:.1f}s remaining  {status}",
-                    end="",
-                    flush=True,
+                    end="", flush=True,
                 )
-
         finally:
-            pipeline.stop()
-            print()  # newline after \r
+            cap.release()
+            print()
 
         if total_inferred == 0:
             log.warning("[wrist_check] No frames inferred — camera issue?")
