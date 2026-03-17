@@ -31,7 +31,12 @@ def _update_dynamo_stats(uploaded: int = 0, sessions: int = 0, recorded: int = 0
     if not config.DYNAMODB_ENABLED:
         return
     try:
-        client = boto3.client("dynamodb", region_name=config.AWS_REGION)
+        client = boto3.client(
+            "dynamodb",
+            region_name          = config.AWS_REGION,
+            aws_access_key_id    = getattr(config, "AWS_ACCESS_KEY_ID", None),
+            aws_secret_access_key= getattr(config, "AWS_SECRET_ACCESS_KEY", None),
+        )
         expressions, values = [], {
             ":zero": {"N": "0"},
             ":ts":   {"S": time.strftime("%Y-%m-%dT%H:%M:%S")},
@@ -77,7 +82,12 @@ class UploadQueue:
         self._stop_event   = threading.Event()
         self._in_flight    = 0
         self._lock         = threading.Lock()
-        self._s3           = boto3.client("s3")
+        self._s3           = boto3.client(
+            "s3",
+            region_name          = config.AWS_REGION,
+            aws_access_key_id    = getattr(config, "AWS_ACCESS_KEY_ID", None),
+            aws_secret_access_key= getattr(config, "AWS_SECRET_ACCESS_KEY", None),
+        )
         self._transfer_cfg = TransferConfig(
             multipart_threshold = config.S3_MULTIPART_CHUNK,
             multipart_chunksize = config.S3_MULTIPART_CHUNK,
@@ -96,10 +106,12 @@ class UploadQueue:
         with self._lock:
             self._in_flight += 1
         self._q.put(UploadJob(local_path=local_path, s3_key=s3_key))
+        import state as _state
+        _state.update(upload_pending=self._in_flight)
         log.info(
             f"[uploader] Queued: {local_path.name} "
             f"({local_path.stat().st_size / 1e6:.0f} MB) "
-            f"→ s3://{config.S3_BUCKET}/{s3_key}"
+            f"-> s3://{config.S3_BUCKET}/{s3_key}"
         )
 
     def pending_count(self) -> int:
@@ -149,9 +161,13 @@ class UploadQueue:
                         f"{config.S3_MAX_RETRIES} attempts. "
                         f"File preserved at {job.local_path}"
                     )
-                    # File intentionally NOT deleted — manual recovery possible
                     with self._lock:
                         self._in_flight -= 1
+                    import state as _state
+                    _state.update(
+                        upload_pending=self._in_flight,
+                        upload_failed=(_state.get("upload_failed") or 0) + 1,
+                    )
 
             self._q.task_done()
 
@@ -173,9 +189,11 @@ class UploadQueue:
         except Exception:
             pass  # key doesn't exist → proceed with upload
         log.info(
-            f"[uploader] ↑ Uploading {job.local_path.name} "
+            f"[uploader] Uploading {job.local_path.name} "
             f"({file_size / 1e6:.0f} MB) attempt {job.attempt + 1}"
         )
+        import state as _state
+        _state.update(upload_current_file=job.local_path.name, upload_current_pct=0)
 
         try:
             self._s3.upload_file(
@@ -199,9 +217,16 @@ class UploadQueue:
                     f"local={file_size}, remote={remote_size}"
                 )
                 return False
-            log.info(f"[uploader] ✓ Verified: {job.s3_key} ({remote_size / 1e6:.0f} MB)")
+            log.info(f"[uploader] Verified: {job.s3_key} ({remote_size / 1e6:.0f} MB)")
             with self._lock:
                 self._in_flight -= 1
+            import state as _state
+            _state.update(
+                upload_pending=self._in_flight,
+                upload_done=_state.get("upload_done") + 1,
+                upload_current_file="",
+                upload_current_pct=0,
+            )
             # Write to shared DynamoDB stats table (same as intern's mobile system)
             threading.Thread(
                 target=_update_dynamo_stats, kwargs={"uploaded": 1}, daemon=True
@@ -236,3 +261,5 @@ class _ProgressCallback:
             if pct >= self._last_pct + 10:
                 self._last_pct = pct
                 log.info(f"[uploader]   {self.name}: {pct}%")
+                import state as _state
+                _state.update(upload_current_pct=pct)

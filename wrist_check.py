@@ -1,6 +1,7 @@
 # wrist_check.py — 5-second wrist presence check via YOLOv8n-pose on Orbbec color stream
 import time
 import logging
+import numpy as np
 import config
 
 log = logging.getLogger(__name__)
@@ -13,7 +14,7 @@ class WristChecker:
         self.model = YOLO(config.YOLO_MODEL)
         log.info("[wrist_check] Model loaded.")
 
-    def run(self) -> tuple[bool, float]:
+    def run(self, progress_cb=None) -> tuple[bool, float]:
         """
         Stream Orbbec color via V4L2 (cv2.VideoCapture) for WRIST_CHECK_DURATION seconds.
         Runs YOLO pose inference every YOLO_EVERY_N_FRAMES frames.
@@ -64,6 +65,8 @@ class WristChecker:
 
                 frac      = both_wrists / total_inferred if total_inferred else 0.0
                 remaining = max(0.0, deadline - time.time())
+                if progress_cb:
+                    progress_cb(total_inferred, both_wrists, frac)
                 bar_len   = 20
                 filled    = int(bar_len * frac)
                 bar       = "█" * filled + "░" * (bar_len - filled)
