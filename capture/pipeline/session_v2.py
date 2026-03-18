@@ -36,16 +36,17 @@ from capture.cameras.fov_check import single_frame_check, _last_stop_time
 
 log = logging.getLogger(__name__)
 
-FRAME_GRAB_TIMEOUT = 15   # seconds to wait for a frame from orbbec_stream
+FRAME_GRAB_TIMEOUT = 20   # seconds to wait for a settled frame from orbbec_stream
 DEVICE_RELEASE_S   = 3.0  # wait after stopping a recording before frame grab
 
 
 def _grab_orbbec_frame(timeout: int = FRAME_GRAB_TIMEOUT) -> Optional[np.ndarray]:
     """
-    Briefly launch orbbec_stream, grab a single color frame, kill it.
+    Briefly launch orbbec_stream, grab a properly exposed color frame.
+    Waits for auto-exposure to stabilize before returning.
     Returns the frame or None on failure.
     """
-    from capture.cameras.fov_check import _last_stop_time as lst
+    from capture.cameras.fov_check import _last_stop_time as lst, ExposureSettler
     since = time.time() - lst
     if since < DEVICE_RELEASE_S:
         wait = DEVICE_RELEASE_S - since
@@ -76,9 +77,10 @@ def _grab_orbbec_frame(timeout: int = FRAME_GRAB_TIMEOUT) -> Optional[np.ndarray
         log.error(f"Failed to launch orbbec_stream: {e}")
         return None
 
-    frame = None
-    buf   = b""
+    frame    = None
+    buf      = b""
     deadline = time.time() + timeout
+    settler  = ExposureSettler()
 
     try:
         while time.time() < deadline:
@@ -98,32 +100,41 @@ def _grab_orbbec_frame(timeout: int = FRAME_GRAB_TIMEOUT) -> Optional[np.ndarray
                 last = buf.rfind(b"FRAME ", len(buf) - 512 * 1024)
                 buf  = buf[last:] if last > 0 else buf[-1024 * 1024:]
 
-            idx = buf.find(b"FRAME COLOR ")
-            if idx == -1:
-                continue
-            nl = buf.find(b"\n", idx)
-            if nl == -1:
-                continue
+            while True:
+                idx = buf.find(b"FRAME COLOR ")
+                if idx == -1:
+                    break
+                nl = buf.find(b"\n", idx)
+                if nl == -1:
+                    buf = buf[idx:]; break
 
-            header = buf[idx:nl].decode("utf-8", errors="ignore").strip()
-            try:
-                parts     = header.split()
-                data_size = int(parts[6])
-            except (IndexError, ValueError):
-                buf = buf[nl + 1:]
-                continue
+                header = buf[idx:nl].decode("utf-8", errors="ignore").strip()
+                try:
+                    parts     = header.split()
+                    data_size = int(parts[6])
+                except (IndexError, ValueError):
+                    buf = buf[nl + 1:]
+                    continue
 
-            frame_end = nl + 1 + data_size
-            if frame_end > len(buf):
-                continue
+                frame_end = nl + 1 + data_size
+                if frame_end > len(buf):
+                    buf = buf[idx:]; break
 
-            data = buf[nl + 1:frame_end]
-            buf  = buf[frame_end:]
+                data = buf[nl + 1:frame_end]
+                buf  = buf[frame_end:]
 
-            decoded = cv2.imdecode(
-                np.frombuffer(data, dtype=np.uint8), cv2.IMREAD_COLOR)
-            if decoded is not None:
-                frame = decoded
+                decoded = cv2.imdecode(
+                    np.frombuffer(data, dtype=np.uint8), cv2.IMREAD_COLOR)
+                if decoded is None:
+                    continue
+
+                # Wait for exposure to settle before accepting
+                if settler.feed(decoded):
+                    frame = decoded
+                    break
+
+            # Break outer loop once we have a settled frame
+            if frame is not None:
                 break
     finally:
         proc.terminate()

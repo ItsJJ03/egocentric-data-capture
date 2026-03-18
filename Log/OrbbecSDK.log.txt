@@ -9689,3 +9689,439 @@
 [03/18 11:34:14.910830][info][7436][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
 [03/18 11:34:14.913434][info][7436][ObLibuvcDevicePort.cpp:87] uvc_close done.
 [03/18 11:34:14.913456][info][7436][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:40:29.214079][warning][13235][UsbEnumeratorLibusb.cpp:399] Failed to open USB device: error=No such device (it may have been disconnected). Try again
+[03/18 12:40:29.264252][warning][13235][UsbEnumeratorLibusb.cpp:403] Failed to open USB device (No such device (it may have been disconnected)), skipping, info.serial and infName may be empty
+[03/18 12:40:29.265719][info][13235][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/18 12:40:29.265750][info][13235][DeviceManager.cpp:25] Current found device(s): (1)
+[03/18 12:40:29.265756][info][13235][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: , Connection: USB3.0
+[03/18 12:40:29.265761][info][13235][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/18 12:40:31.277787][info][13235][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/18 12:40:31.277874][info][13235][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: , Connection: USB3.0
+[03/18 12:40:31.278055][warning][13235][PropertyServer.cpp:87] [] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/18 12:40:31.278112][warning][13235][PropertyServer.cpp:87] [] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/18 12:40:31.278155][warning][13235][PropertyServer.cpp:87] [] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/18 12:40:31.278256][warning][13235][ObException.cpp:8] Can not open device: 4-1-0
+[03/18 12:40:31.278444][warning][13235][UsbEnumeratorLibusb.cpp:458] Execute failure! A libobsensor_exception has occurred!
+ - where: UsbEnumeratorLibusb.cpp(458):openUsbDevice
+ - msg: Can not open device: 4-1-0
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/18 12:40:31.278466][warning][13235][ObException.cpp:8] Can not open device: 4-1-0
+[03/18 12:40:31.278482][warning][13235][UsbEnumeratorLibusb.cpp:458] Execute failure! A libobsensor_exception has occurred!
+ - where: UsbEnumeratorLibusb.cpp(458):openUsbDevice
+ - msg: Can not open device: 4-1-0
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/18 12:40:31.278486][warning][13235][ObException.hpp:48] usbEnumerator openUsbDevice failed!
+[03/18 12:40:31.288142][warning][13235][ObException.cpp:8] Can not open device: 4-1-0
+[03/18 12:40:31.288187][warning][13235][UsbEnumeratorLibusb.cpp:458] Execute failure! A libobsensor_exception has occurred!
+ - where: UsbEnumeratorLibusb.cpp(458):openUsbDevice
+ - msg: Can not open device: 4-1-0
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/18 12:40:31.288227][warning][13235][ObException.cpp:8] Can not open device: 4-1-0
+[03/18 12:40:31.288241][warning][13235][UsbEnumeratorLibusb.cpp:458] Execute failure! A libobsensor_exception has occurred!
+ - where: UsbEnumeratorLibusb.cpp(458):openUsbDevice
+ - msg: Can not open device: 4-1-0
+ - type: N11libobsensor23invalid_value_exceptionE
+[03/18 12:40:31.288244][warning][13235][ObException.hpp:48] usbEnumerator openUsbDevice failed!
+[03/18 12:40:31.288275][warning][13235][DeviceBase.cpp:343] Execute failure! A libobsensor_exception has occurred!
+ - where: DeviceBase.cpp(343):getComponent
+ - msg: usbEnumerator openUsbDevice failed!
+ - type: N11libobsensor29camera_disconnected_exceptionE
+[03/18 12:40:43.525791][info][13274][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/18 12:40:43.525874][info][13274][DeviceManager.cpp:25] Current found device(s): (1)
+[03/18 12:40:43.525879][info][13274][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: CPAW752006B, Connection: USB3.0
+[03/18 12:40:43.525884][info][13274][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/18 12:40:43.902508][info][13283][DeviceManager.cpp:266] Device changed! removed: 1, added: 0
+[03/18 12:40:43.902612][info][13283][DeviceManager.cpp:25] Removed device(s) list: (1)
+[03/18 12:40:43.902621][info][13283][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: CPAW752006B, Connection: USB3.0
+[03/18 12:40:43.902627][info][13283][DeviceManager.cpp:25] Current device(s) list: (0)
+[03/18 12:40:45.547176][info][13274][DeviceManager.cpp:25] Current device(s) list: (0)
+[03/18 12:41:00.738762][info][13359][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/18 12:41:00.738835][info][13359][DeviceManager.cpp:25] Current found device(s): (1)
+[03/18 12:41:00.738841][info][13359][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: CPAW752006B, Connection: USB3.0
+[03/18 12:41:00.738846][info][13359][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/18 12:41:02.742035][info][13359][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/18 12:41:02.742085][info][13359][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: CPAW752006B, Connection: USB3.0
+[03/18 12:41:02.742181][warning][13359][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/18 12:41:02.742192][warning][13359][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/18 12:41:02.742207][warning][13359][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/18 12:41:02.768974][info][13359][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2 L, PID: 0x0673, SN/ID: CPAW752006B FW: 1.4.48
+[03/18 12:41:02.769022][info][13359][Pipeline.cpp:42] [CPAW752006B] Pipeline created with device: {name: Gemini 2 L, sn: CPAW752006B}, @0x5556326CEA70
+[03/18 12:41:02.861093][info][13359][Pipeline.cpp:216] [CPAW752006B] Check and set config done!
+[03/18 12:41:02.862166][info][13359][Pipeline.cpp:254] [CPAW752006B] Try to start streams!
+[03/18 12:41:02.862230][info][13359][VideoSensor.cpp:58] [CPAW752006B] Try to start stream: {type: Color, format: MJPG, width: 1280, height: 720, fps: 30}
+[03/18 12:41:02.862245][info][13359][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STARTING@Color
+[03/18 12:41:02.862252][info][13359][VideoSensor.cpp:127] [CPAW752006B] Start backend stream: {type: Color, format: MJPG, width: 1280, height: 720, fps: 30}
+[03/18 12:41:02.869566][info][13359][VideoSensor.cpp:58] [CPAW752006B] Try to start stream: {type: Depth, format: Y16, width: 640, height: 400, fps: 30}
+[03/18 12:41:02.869590][info][13359][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STARTING@Depth
+[03/18 12:41:02.869601][info][13359][VideoSensor.cpp:127] [CPAW752006B] Start backend stream: {type: Depth, format: Y16, width: 640, height: 400, fps: 30}
+[03/18 12:41:02.874249][info][13359][Pipeline.cpp:270] [CPAW752006B] Start streams done!
+[03/18 12:41:02.874276][info][13359][Pipeline.cpp:238] [CPAW752006B] Pipeline start done!
+[03/18 12:41:02.914143][info][13372][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STREAMING@Depth
+[03/18 12:41:03.032575][info][13371][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STREAMING@Color
+[03/18 12:41:07.943909][info][13372][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.224697fps
+[03/18 12:41:07.949006][info][13377][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.327213fps
+[03/18 12:41:08.060089][info][13371][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.230709fps
+[03/18 12:41:08.060498][info][13382][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.260801fps
+[03/18 12:41:12.973877][info][13372][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:41:12.981358][info][13377][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.007948fps
+[03/18 12:41:13.085357][info][13371][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.049751fps
+[03/18 12:41:13.085854][info][13382][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.049751fps
+[03/18 12:41:18.003446][info][13372][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:41:18.008828][info][13377][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.037796fps
+[03/18 12:41:18.111465][info][13371][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:41:18.111603][info][13382][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.043772fps
+[03/18 12:41:23.033915][info][13372][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:41:23.040315][info][13377][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.007948fps
+[03/18 12:41:23.138385][info][13371][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.037796fps
+[03/18 12:41:23.138879][info][13382][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.037796fps
+[03/18 12:41:28.063833][info][13372][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:41:28.072262][info][13377][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.007948fps
+[03/18 12:41:28.165963][info][13371][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.037796fps
+[03/18 12:41:28.167111][info][13382][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.025850fps
+[03/18 12:41:32.959793][info][13359][Pipeline.cpp:336] [CPAW752006B] Try to stop pipeline!
+[03/18 12:41:32.959854][info][13359][Pipeline.cpp:312] [CPAW752006B] Try to stop streams!
+[03/18 12:41:32.959881][info][13359][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPING@Depth
+[03/18 12:41:32.965916][info][13359][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPED@Depth
+[03/18 12:41:32.966023][info][13359][Pipeline.cpp:326] [CPAW752006B] Sensor stream stopped, sensorType=Depth
+[03/18 12:41:32.966039][info][13359][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPING@Color
+[03/18 12:41:32.976329][info][13359][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPED@Color
+[03/18 12:41:32.976438][info][13359][Pipeline.cpp:326] [CPAW752006B] Sensor stream stopped, sensorType=Color
+[03/18 12:41:32.976447][info][13359][Pipeline.cpp:332] [CPAW752006B] Stop streams done!
+[03/18 12:41:32.978217][info][13359][Pipeline.cpp:356] [CPAW752006B] Stop pipeline done!
+[03/18 12:41:33.020263][info][13359][Pipeline.cpp:53] [CPAW752006B] Pipeline destroyed! @0x5556326CEA70
+[03/18 12:41:33.020953][info][13359][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:41:33.020984][info][13359][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:41:33.021118][info][13359][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:41:33.030141][info][13359][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:41:33.030183][info][13359][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:41:33.030242][info][13359][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:41:33.039150][info][13359][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:41:33.039189][info][13359][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:41:33.039311][info][13359][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:41:33.048231][info][13359][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:41:33.048255][info][13359][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:41:44.974014][info][13507][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/18 12:41:44.974175][info][13507][DeviceManager.cpp:25] Current found device(s): (1)
+[03/18 12:41:44.974190][info][13507][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: CPAW752006B, Connection: USB3.0
+[03/18 12:41:44.974197][info][13507][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/18 12:41:46.990522][info][13507][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/18 12:41:46.990574][info][13507][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: CPAW752006B, Connection: USB3.0
+[03/18 12:41:46.990692][warning][13507][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/18 12:41:46.990706][warning][13507][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/18 12:41:46.990727][warning][13507][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/18 12:41:47.018961][info][13507][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2 L, PID: 0x0673, SN/ID: CPAW752006B FW: 1.4.48
+[03/18 12:41:47.019022][info][13507][Pipeline.cpp:42] [CPAW752006B] Pipeline created with device: {name: Gemini 2 L, sn: CPAW752006B}, @0x555656D26A70
+[03/18 12:41:47.118804][info][13507][Pipeline.cpp:216] [CPAW752006B] Check and set config done!
+[03/18 12:41:47.119768][info][13507][Pipeline.cpp:254] [CPAW752006B] Try to start streams!
+[03/18 12:41:47.119786][info][13507][VideoSensor.cpp:58] [CPAW752006B] Try to start stream: {type: Color, format: MJPG, width: 1280, height: 720, fps: 30}
+[03/18 12:41:47.119794][info][13507][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STARTING@Color
+[03/18 12:41:47.119801][info][13507][VideoSensor.cpp:127] [CPAW752006B] Start backend stream: {type: Color, format: MJPG, width: 1280, height: 720, fps: 30}
+[03/18 12:41:47.127500][info][13507][VideoSensor.cpp:58] [CPAW752006B] Try to start stream: {type: Depth, format: Y16, width: 640, height: 400, fps: 30}
+[03/18 12:41:47.127553][info][13507][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STARTING@Depth
+[03/18 12:41:47.127563][info][13507][VideoSensor.cpp:127] [CPAW752006B] Start backend stream: {type: Depth, format: Y16, width: 640, height: 400, fps: 30}
+[03/18 12:41:47.132419][info][13507][Pipeline.cpp:270] [CPAW752006B] Start streams done!
+[03/18 12:41:47.132440][info][13507][Pipeline.cpp:238] [CPAW752006B] Pipeline start done!
+[03/18 12:41:47.180274][info][13522][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STREAMING@Depth
+[03/18 12:41:47.290186][info][13521][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STREAMING@Color
+[03/18 12:41:52.210097][info][13522][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.218687fps
+[03/18 12:41:52.218515][info][13527][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.290953fps
+[03/18 12:41:52.316923][info][13521][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.242737fps
+[03/18 12:41:52.317263][info][13532][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.260801fps
+[03/18 12:41:57.239830][info][13522][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.025850fps
+[03/18 12:41:57.246283][info][13527][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.031822fps
+[03/18 12:41:57.342828][info][13521][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:41:57.343239][info][13532][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.043772fps
+[03/18 12:42:02.269720][info][13522][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:42:02.276630][info][13527][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.019880fps
+[03/18 12:42:02.369042][info][13521][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.037796fps
+[03/18 12:42:02.369279][info][13532][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.043772fps
+[03/18 12:42:07.299484][info][13522][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:42:07.306700][info][13527][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.019880fps
+[03/18 12:42:07.395366][info][13521][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:42:07.395546][info][13532][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.043772fps
+[03/18 12:42:12.329216][info][13522][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:42:12.362398][info][13527][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=29.865505fps
+[03/18 12:42:12.421507][info][13521][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:42:12.422916][info][13532][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.037796fps
+[03/18 12:42:17.226704][info][13507][Pipeline.cpp:336] [CPAW752006B] Try to stop pipeline!
+[03/18 12:42:17.226799][info][13507][Pipeline.cpp:312] [CPAW752006B] Try to stop streams!
+[03/18 12:42:17.226855][info][13507][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPING@Depth
+[03/18 12:42:17.236319][info][13507][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPED@Depth
+[03/18 12:42:17.236421][info][13507][Pipeline.cpp:326] [CPAW752006B] Sensor stream stopped, sensorType=Depth
+[03/18 12:42:17.236434][info][13507][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPING@Color
+[03/18 12:42:17.242232][info][13507][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPED@Color
+[03/18 12:42:17.245624][info][13507][Pipeline.cpp:326] [CPAW752006B] Sensor stream stopped, sensorType=Color
+[03/18 12:42:17.245712][info][13507][Pipeline.cpp:332] [CPAW752006B] Stop streams done!
+[03/18 12:42:17.251267][info][13507][Pipeline.cpp:356] [CPAW752006B] Stop pipeline done!
+[03/18 12:42:17.268390][info][13507][Pipeline.cpp:53] [CPAW752006B] Pipeline destroyed! @0x555656D26A70
+[03/18 12:42:17.268541][info][13507][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:42:17.268558][info][13507][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:42:17.268646][info][13507][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:42:17.276902][info][13507][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:42:17.276953][info][13507][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:42:17.277017][info][13507][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:42:17.285825][info][13507][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:42:17.286059][info][13507][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:42:17.286937][info][13507][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:42:17.295088][info][13507][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:42:17.295138][info][13507][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:42:29.046344][info][13645][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/18 12:42:29.046473][info][13645][DeviceManager.cpp:25] Current found device(s): (1)
+[03/18 12:42:29.046481][info][13645][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: CPAW752006B, Connection: USB3.0
+[03/18 12:42:29.046487][info][13645][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/18 12:42:31.050169][info][13645][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/18 12:42:31.050231][info][13645][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: CPAW752006B, Connection: USB3.0
+[03/18 12:42:31.050350][warning][13645][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/18 12:42:31.050369][warning][13645][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/18 12:42:31.050391][warning][13645][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/18 12:42:31.074939][info][13645][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2 L, PID: 0x0673, SN/ID: CPAW752006B FW: 1.4.48
+[03/18 12:42:31.075015][info][13645][Pipeline.cpp:42] [CPAW752006B] Pipeline created with device: {name: Gemini 2 L, sn: CPAW752006B}, @0x55561CAC68D0
+[03/18 12:42:31.171593][info][13645][Pipeline.cpp:216] [CPAW752006B] Check and set config done!
+[03/18 12:42:31.172555][info][13645][Pipeline.cpp:254] [CPAW752006B] Try to start streams!
+[03/18 12:42:31.172601][info][13645][VideoSensor.cpp:58] [CPAW752006B] Try to start stream: {type: Color, format: MJPG, width: 1280, height: 720, fps: 30}
+[03/18 12:42:31.172615][info][13645][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STARTING@Color
+[03/18 12:42:31.172622][info][13645][VideoSensor.cpp:127] [CPAW752006B] Start backend stream: {type: Color, format: MJPG, width: 1280, height: 720, fps: 30}
+[03/18 12:42:31.181147][info][13645][VideoSensor.cpp:58] [CPAW752006B] Try to start stream: {type: Depth, format: Y16, width: 640, height: 400, fps: 30}
+[03/18 12:42:31.181189][info][13645][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STARTING@Depth
+[03/18 12:42:31.181199][info][13645][VideoSensor.cpp:127] [CPAW752006B] Start backend stream: {type: Depth, format: Y16, width: 640, height: 400, fps: 30}
+[03/18 12:42:31.186474][info][13645][Pipeline.cpp:270] [CPAW752006B] Start streams done!
+[03/18 12:42:31.186517][info][13645][Pipeline.cpp:238] [CPAW752006B] Pipeline start done!
+[03/18 12:42:31.226491][info][13658][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STREAMING@Depth
+[03/18 12:42:31.343948][info][13657][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STREAMING@Color
+[03/18 12:42:36.256140][info][13658][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.218687fps
+[03/18 12:42:36.263221][info][13663][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.357500fps
+[03/18 12:42:36.370453][info][13657][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.236723fps
+[03/18 12:42:36.370662][info][13668][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.260801fps
+[03/18 12:42:41.285976][info][13658][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.025850fps
+[03/18 12:42:41.294205][info][13663][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.013912fps
+[03/18 12:42:41.396775][info][13657][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:42:41.396948][info][13668][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.043772fps
+[03/18 12:42:46.315843][info][13658][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:42:46.327210][info][13663][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.001987fps
+[03/18 12:42:46.423008][info][13657][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:42:46.423271][info][13668][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.037796fps
+[03/18 12:42:51.345560][info][13658][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:42:51.350908][info][13663][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.061718fps
+[03/18 12:42:51.449311][info][13657][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.037796fps
+[03/18 12:42:51.449529][info][13668][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.043772fps
+[03/18 12:42:56.375533][info][13658][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:42:56.381945][info][13663][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.013912fps
+[03/18 12:42:56.475369][info][13657][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:42:56.477666][info][13668][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.031822fps
+[03/18 12:43:01.280316][info][13645][Pipeline.cpp:336] [CPAW752006B] Try to stop pipeline!
+[03/18 12:43:01.280371][info][13645][Pipeline.cpp:312] [CPAW752006B] Try to stop streams!
+[03/18 12:43:01.280408][info][13645][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPING@Depth
+[03/18 12:43:01.287932][info][13645][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPED@Depth
+[03/18 12:43:01.288002][info][13645][Pipeline.cpp:326] [CPAW752006B] Sensor stream stopped, sensorType=Depth
+[03/18 12:43:01.288015][info][13645][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPING@Color
+[03/18 12:43:01.294093][info][13645][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPED@Color
+[03/18 12:43:01.294255][info][13645][Pipeline.cpp:326] [CPAW752006B] Sensor stream stopped, sensorType=Color
+[03/18 12:43:01.294267][info][13645][Pipeline.cpp:332] [CPAW752006B] Stop streams done!
+[03/18 12:43:01.295180][info][13645][Pipeline.cpp:356] [CPAW752006B] Stop pipeline done!
+[03/18 12:43:01.319798][info][13645][Pipeline.cpp:53] [CPAW752006B] Pipeline destroyed! @0x55561CAC68D0
+[03/18 12:43:01.320015][info][13645][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:43:01.320040][info][13645][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:43:01.320185][info][13645][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:43:01.348180][info][13645][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:43:01.348222][info][13645][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:43:01.348272][info][13645][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:43:01.363450][info][13645][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:43:01.363492][info][13645][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:43:01.363841][info][13645][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:43:01.373356][info][13645][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:43:01.373409][info][13645][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:43:13.536575][info][13782][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/18 12:43:13.536680][info][13782][DeviceManager.cpp:25] Current found device(s): (1)
+[03/18 12:43:13.536685][info][13782][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: CPAW752006B, Connection: USB3.0
+[03/18 12:43:13.536690][info][13782][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/18 12:43:15.546764][info][13782][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/18 12:43:15.546816][info][13782][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: CPAW752006B, Connection: USB3.0
+[03/18 12:43:15.546928][warning][13782][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/18 12:43:15.546942][warning][13782][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/18 12:43:15.546967][warning][13782][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/18 12:43:15.571530][info][13782][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2 L, PID: 0x0673, SN/ID: CPAW752006B FW: 1.4.48
+[03/18 12:43:15.571604][info][13782][Pipeline.cpp:42] [CPAW752006B] Pipeline created with device: {name: Gemini 2 L, sn: CPAW752006B}, @0x555609D328D0
+[03/18 12:43:15.670924][info][13782][Pipeline.cpp:216] [CPAW752006B] Check and set config done!
+[03/18 12:43:15.671835][info][13782][Pipeline.cpp:254] [CPAW752006B] Try to start streams!
+[03/18 12:43:15.671865][info][13782][VideoSensor.cpp:58] [CPAW752006B] Try to start stream: {type: Color, format: MJPG, width: 1280, height: 720, fps: 30}
+[03/18 12:43:15.671877][info][13782][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STARTING@Color
+[03/18 12:43:15.671883][info][13782][VideoSensor.cpp:127] [CPAW752006B] Start backend stream: {type: Color, format: MJPG, width: 1280, height: 720, fps: 30}
+[03/18 12:43:15.679288][info][13782][VideoSensor.cpp:58] [CPAW752006B] Try to start stream: {type: Depth, format: Y16, width: 640, height: 400, fps: 30}
+[03/18 12:43:15.679317][info][13782][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STARTING@Depth
+[03/18 12:43:15.679324][info][13782][VideoSensor.cpp:127] [CPAW752006B] Start backend stream: {type: Depth, format: Y16, width: 640, height: 400, fps: 30}
+[03/18 12:43:15.684630][info][13782][Pipeline.cpp:270] [CPAW752006B] Start streams done!
+[03/18 12:43:15.684672][info][13782][Pipeline.cpp:238] [CPAW752006B] Pipeline start done!
+[03/18 12:43:15.726412][info][13797][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STREAMING@Depth
+[03/18 12:43:15.842179][info][13796][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STREAMING@Color
+[03/18 12:43:20.756033][info][13797][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.218687fps
+[03/18 12:43:20.764153][info][13802][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.260801fps
+[03/18 12:43:20.868802][info][13796][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.242737fps
+[03/18 12:43:20.869498][info][13807][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.260801fps
+[03/18 12:43:25.785807][info][13797][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.025850fps
+[03/18 12:43:25.792831][info][13802][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.031822fps
+[03/18 12:43:25.894920][info][13796][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:43:25.895114][info][13807][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.043772fps
+[03/18 12:43:30.815690][info][13797][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:43:30.822978][info][13802][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.019880fps
+[03/18 12:43:30.921794][info][13796][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.037796fps
+[03/18 12:43:30.921997][info][13807][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.043772fps
+[03/18 12:43:35.845398][info][13797][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:43:35.857424][info][13802][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=29.990070fps
+[03/18 12:43:35.947312][info][13796][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:43:35.947456][info][13807][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.043772fps
+[03/18 12:43:40.875197][info][13797][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:43:40.880507][info][13802][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.061718fps
+[03/18 12:43:40.973458][info][13796][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:43:40.973605][info][13807][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.043772fps
+[03/18 12:43:45.776109][info][13782][Pipeline.cpp:336] [CPAW752006B] Try to stop pipeline!
+[03/18 12:43:45.776172][info][13782][Pipeline.cpp:312] [CPAW752006B] Try to stop streams!
+[03/18 12:43:45.776208][info][13782][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPING@Depth
+[03/18 12:43:45.783815][info][13782][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPED@Depth
+[03/18 12:43:45.783890][info][13782][Pipeline.cpp:326] [CPAW752006B] Sensor stream stopped, sensorType=Depth
+[03/18 12:43:45.783908][info][13782][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPING@Color
+[03/18 12:43:45.795050][info][13782][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPED@Color
+[03/18 12:43:45.795164][info][13782][Pipeline.cpp:326] [CPAW752006B] Sensor stream stopped, sensorType=Color
+[03/18 12:43:45.795176][info][13782][Pipeline.cpp:332] [CPAW752006B] Stop streams done!
+[03/18 12:43:45.796098][info][13782][Pipeline.cpp:356] [CPAW752006B] Stop pipeline done!
+[03/18 12:43:45.797656][info][13782][Pipeline.cpp:53] [CPAW752006B] Pipeline destroyed! @0x555609D328D0
+[03/18 12:43:45.797909][info][13782][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:43:45.797927][info][13782][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:43:45.798111][info][13782][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:43:45.807677][info][13782][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:43:45.807701][info][13782][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:43:45.807737][info][13782][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:43:45.819422][info][13782][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:43:45.819461][info][13782][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:43:45.819562][info][13782][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:43:45.826485][info][13782][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:43:45.826527][info][13782][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:43:57.925945][info][13923][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/18 12:43:57.926078][info][13923][DeviceManager.cpp:25] Current found device(s): (1)
+[03/18 12:43:57.926087][info][13923][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: CPAW752006B, Connection: USB3.0
+[03/18 12:43:57.926094][info][13923][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/18 12:43:59.950091][info][13923][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/18 12:43:59.950166][info][13923][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: CPAW752006B, Connection: USB3.0
+[03/18 12:43:59.950306][warning][13923][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/18 12:43:59.950327][warning][13923][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/18 12:43:59.950351][warning][13923][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/18 12:43:59.976372][info][13923][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2 L, PID: 0x0673, SN/ID: CPAW752006B FW: 1.4.48
+[03/18 12:43:59.976460][info][13923][Pipeline.cpp:42] [CPAW752006B] Pipeline created with device: {name: Gemini 2 L, sn: CPAW752006B}, @0x55566CEC2CC0
+[03/18 12:44:00.073731][info][13923][Pipeline.cpp:216] [CPAW752006B] Check and set config done!
+[03/18 12:44:00.074741][info][13923][Pipeline.cpp:254] [CPAW752006B] Try to start streams!
+[03/18 12:44:00.074767][info][13923][VideoSensor.cpp:58] [CPAW752006B] Try to start stream: {type: Color, format: MJPG, width: 1280, height: 720, fps: 30}
+[03/18 12:44:00.074777][info][13923][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STARTING@Color
+[03/18 12:44:00.074797][info][13923][VideoSensor.cpp:127] [CPAW752006B] Start backend stream: {type: Color, format: MJPG, width: 1280, height: 720, fps: 30}
+[03/18 12:44:00.082136][info][13923][VideoSensor.cpp:58] [CPAW752006B] Try to start stream: {type: Depth, format: Y16, width: 640, height: 400, fps: 30}
+[03/18 12:44:00.082164][info][13923][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STARTING@Depth
+[03/18 12:44:00.082170][info][13923][VideoSensor.cpp:127] [CPAW752006B] Start backend stream: {type: Depth, format: Y16, width: 640, height: 400, fps: 30}
+[03/18 12:44:00.087599][info][13923][Pipeline.cpp:270] [CPAW752006B] Start streams done!
+[03/18 12:44:00.087642][info][13923][Pipeline.cpp:238] [CPAW752006B] Pipeline start done!
+[03/18 12:44:00.136858][info][13937][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STREAMING@Depth
+[03/18 12:44:00.245289][info][13936][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STREAMING@Color
+[03/18 12:44:05.166406][info][13937][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.218687fps
+[03/18 12:44:05.172219][info][13944][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.303032fps
+[03/18 12:44:05.271648][info][13936][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.242737fps
+[03/18 12:44:05.272270][info][13949][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.260801fps
+[03/18 12:44:10.195976][info][13937][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.025850fps
+[03/18 12:44:10.201501][info][13944][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.025850fps
+[03/18 12:44:10.297768][info][13936][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:44:10.297902][info][13949][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.049751fps
+[03/18 12:44:15.225953][info][13937][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:44:15.231541][info][13944][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.019880fps
+[03/18 12:44:15.324031][info][13936][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:44:15.324410][info][13949][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.037796fps
+[03/18 12:44:20.256186][info][13937][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:44:20.262616][info][13944][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.013912fps
+[03/18 12:44:20.350130][info][13936][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.037796fps
+[03/18 12:44:20.350263][info][13949][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.043772fps
+[03/18 12:44:25.285518][info][13937][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:44:25.291864][info][13944][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.025850fps
+[03/18 12:44:25.376386][info][13936][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:44:25.376548][info][13949][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.043772fps
+[03/18 12:44:30.177545][info][13923][Pipeline.cpp:336] [CPAW752006B] Try to stop pipeline!
+[03/18 12:44:30.177601][info][13923][Pipeline.cpp:312] [CPAW752006B] Try to stop streams!
+[03/18 12:44:30.177622][info][13923][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPING@Depth
+[03/18 12:44:30.185524][info][13923][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPED@Depth
+[03/18 12:44:30.185899][info][13923][Pipeline.cpp:326] [CPAW752006B] Sensor stream stopped, sensorType=Depth
+[03/18 12:44:30.185920][info][13923][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPING@Color
+[03/18 12:44:30.192978][info][13923][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPED@Color
+[03/18 12:44:30.193039][info][13923][Pipeline.cpp:326] [CPAW752006B] Sensor stream stopped, sensorType=Color
+[03/18 12:44:30.193042][info][13923][Pipeline.cpp:332] [CPAW752006B] Stop streams done!
+[03/18 12:44:30.193988][info][13923][Pipeline.cpp:356] [CPAW752006B] Stop pipeline done!
+[03/18 12:44:30.211170][info][13923][Pipeline.cpp:53] [CPAW752006B] Pipeline destroyed! @0x55566CEC2CC0
+[03/18 12:44:30.211286][info][13923][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:44:30.211295][info][13923][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:44:30.211367][info][13923][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:44:30.219813][info][13923][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:44:30.219850][info][13923][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:44:30.219904][info][13923][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:44:30.236343][info][13923][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:44:30.236393][info][13923][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:44:30.236493][info][13923][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:44:30.247859][info][13923][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:44:30.249266][info][13923][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:44:42.350294][info][14063][LinuxUsbPal.cpp:335] Create PollingDeviceWatcher!
+[03/18 12:44:42.350385][info][14063][DeviceManager.cpp:25] Current found device(s): (1)
+[03/18 12:44:42.350393][info][14063][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: CPAW752006B, Connection: USB3.0
+[03/18 12:44:42.350400][info][14063][DeviceManager.cpp:339] Enable net device enumeration: true
+[03/18 12:44:44.351682][info][14063][DeviceManager.cpp:25] Current device(s) list: (1)
+[03/18 12:44:44.351733][info][14063][DeviceManager.cpp:34] 	- Name: Gemini2 L, PID: 0x0673, SN/ID: CPAW752006B, Connection: USB3.0
+[03/18 12:44:44.351845][warning][14063][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=108
+[03/18 12:44:44.351859][warning][14063][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=4035
+[03/18 12:44:44.351879][warning][14063][PropertyServer.cpp:87] [CPAW752006B] Not added to property map, property not found in OBPropertyBaseInfoMap, id=5003
+[03/18 12:44:44.375699][info][14063][DeviceManager.cpp:194] Device created successfully! Name: Gemini 2 L, PID: 0x0673, SN/ID: CPAW752006B FW: 1.4.48
+[03/18 12:44:44.375783][info][14063][Pipeline.cpp:42] [CPAW752006B] Pipeline created with device: {name: Gemini 2 L, sn: CPAW752006B}, @0x555585B6E8D0
+[03/18 12:44:44.472989][info][14063][Pipeline.cpp:216] [CPAW752006B] Check and set config done!
+[03/18 12:44:44.473881][info][14063][Pipeline.cpp:254] [CPAW752006B] Try to start streams!
+[03/18 12:44:44.473923][info][14063][VideoSensor.cpp:58] [CPAW752006B] Try to start stream: {type: Color, format: MJPG, width: 1280, height: 720, fps: 30}
+[03/18 12:44:44.473935][info][14063][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STARTING@Color
+[03/18 12:44:44.473942][info][14063][VideoSensor.cpp:127] [CPAW752006B] Start backend stream: {type: Color, format: MJPG, width: 1280, height: 720, fps: 30}
+[03/18 12:44:44.482977][info][14063][VideoSensor.cpp:58] [CPAW752006B] Try to start stream: {type: Depth, format: Y16, width: 640, height: 400, fps: 30}
+[03/18 12:44:44.483018][info][14063][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STARTING@Depth
+[03/18 12:44:44.483029][info][14063][VideoSensor.cpp:127] [CPAW752006B] Start backend stream: {type: Depth, format: Y16, width: 640, height: 400, fps: 30}
+[03/18 12:44:44.487774][info][14063][Pipeline.cpp:270] [CPAW752006B] Start streams done!
+[03/18 12:44:44.487795][info][14063][Pipeline.cpp:238] [CPAW752006B] Pipeline start done!
+[03/18 12:44:44.531180][info][14076][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STREAMING@Depth
+[03/18 12:44:44.645835][info][14075][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STREAMING@Color
+[03/18 12:44:49.560880][info][14076][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.224697fps
+[03/18 12:44:49.567828][info][14081][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.321165fps
+[03/18 12:44:49.672292][info][14075][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.236723fps
+[03/18 12:44:49.672444][info][14086][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.260801fps
+[03/18 12:44:54.591394][info][14076][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.013912fps
+[03/18 12:44:54.601517][info][14081][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=29.996027fps
+[03/18 12:44:54.698487][info][14075][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:44:54.698615][info][14086][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.043772fps
+[03/18 12:44:59.620561][info][14076][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.025850fps
+[03/18 12:44:59.626423][info][14081][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.049751fps
+[03/18 12:44:59.726142][info][14075][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.037796fps
+[03/18 12:44:59.726303][info][14086][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.031822fps
+[03/18 12:45:04.650740][info][14076][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.019880fps
+[03/18 12:45:04.657321][info][14081][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.013912fps
+[03/18 12:45:04.751396][info][14075][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:45:04.751778][info][14086][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.049751fps
+[03/18 12:45:09.680007][info][14076][VideoSensor.cpp:153] [CPAW752006B] Depth backend frame callback, frameRate=30.025850fps
+[03/18 12:45:09.685329][info][14081][SensorBase.cpp:370] [CPAW752006B] Depth Streaming... frameRate=30.031822fps
+[03/18 12:45:09.777136][info][14075][VideoSensor.cpp:153] [CPAW752006B] Color backend frame callback, frameRate=30.043772fps
+[03/18 12:45:09.777295][info][14086][SensorBase.cpp:370] [CPAW752006B] Color Streaming... frameRate=30.043772fps
+[03/18 12:45:14.577374][info][14063][Pipeline.cpp:336] [CPAW752006B] Try to stop pipeline!
+[03/18 12:45:14.577444][info][14063][Pipeline.cpp:312] [CPAW752006B] Try to stop streams!
+[03/18 12:45:14.577478][info][14063][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPING@Depth
+[03/18 12:45:14.582624][info][14063][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPED@Depth
+[03/18 12:45:14.583805][info][14063][Pipeline.cpp:326] [CPAW752006B] Sensor stream stopped, sensorType=Depth
+[03/18 12:45:14.583839][info][14063][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPING@Color
+[03/18 12:45:14.592564][info][14063][SensorBase.cpp:213] [CPAW752006B] Stream state changed to STOPPED@Color
+[03/18 12:45:14.592654][info][14063][Pipeline.cpp:326] [CPAW752006B] Sensor stream stopped, sensorType=Color
+[03/18 12:45:14.592669][info][14063][Pipeline.cpp:332] [CPAW752006B] Stop streams done!
+[03/18 12:45:14.597702][info][14063][Pipeline.cpp:356] [CPAW752006B] Stop pipeline done!
+[03/18 12:45:14.601424][info][14063][Pipeline.cpp:53] [CPAW752006B] Pipeline destroyed! @0x555585B6E8D0
+[03/18 12:45:14.603591][info][14063][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:45:14.603636][info][14063][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:45:14.603749][info][14063][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:45:14.616439][info][14063][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:45:14.616483][info][14063][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:45:14.616534][info][14063][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:45:14.632611][info][14063][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:45:14.632645][info][14063][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done
+[03/18 12:45:14.632749][info][14063][SensorBase.cpp:47] [CPAW752006B] SensorBase is destroyed
+[03/18 12:45:14.636940][info][14063][ObLibuvcDevicePort.cpp:87] uvc_close done.
+[03/18 12:45:14.636980][info][14063][ObLibuvcDevicePort.cpp:88] ~ObLibuvcDevicePort done

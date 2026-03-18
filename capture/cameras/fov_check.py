@@ -23,9 +23,89 @@ SKIN_UPPER_NP = np.array(SKIN_UPPER, dtype=np.uint8)
 STARTUP_SECS     = 3
 DEVICE_RELEASE_S = 2.5
 
+# Auto-exposure settling parameters
+AE_WINDOW_SIZE     = 5     # sliding window of brightness samples
+AE_VARIANCE_THRESH = 15.0  # max variance to consider "settled"
+AE_MIN_BRIGHTNESS  = 25    # minimum mean brightness (reject black frames)
+AE_MAX_SETTLE_SEC  = 6.0   # give up waiting after this many seconds
+
 _last_stop_time = 0.0
 _yolo_model     = None
 _yolo_loaded    = False
+
+
+class ExposureSettler:
+    """
+    Tracks mean frame brightness over a sliding window.
+    Reports settled once variance drops below threshold
+    and brightness is above minimum floor.
+    """
+
+    def __init__(self, window_size=AE_WINDOW_SIZE,
+                 variance_thresh=AE_VARIANCE_THRESH,
+                 min_brightness=AE_MIN_BRIGHTNESS,
+                 max_settle_sec=AE_MAX_SETTLE_SEC):
+        self.window_size     = window_size
+        self.variance_thresh = variance_thresh
+        self.min_brightness  = min_brightness
+        self.max_settle_sec  = max_settle_sec
+        self._history        = []
+        self._settled        = False
+        self._start_time     = time.time()
+        self._settle_time    = None
+
+    def feed(self, frame: np.ndarray) -> bool:
+        """Feed a frame. Returns True if exposure is settled."""
+        if self._settled:
+            return True
+
+        mean_brightness = float(np.mean(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)))
+        self._history.append(mean_brightness)
+
+        # Keep only last N
+        if len(self._history) > self.window_size:
+            self._history = self._history[-self.window_size:]
+
+        # Need full window
+        if len(self._history) < self.window_size:
+            return False
+
+        variance   = float(np.var(self._history))
+        avg_bright = float(np.mean(self._history))
+
+        if avg_bright >= self.min_brightness and variance <= self.variance_thresh:
+            self._settled = True
+            self._settle_time = time.time()
+            elapsed = self._settle_time - self._start_time
+            log.info(f"Auto-exposure settled — brightness={avg_bright:.0f} "
+                     f"variance={variance:.1f} ({elapsed:.1f}s)")
+            return True
+
+        # Force settle after timeout
+        if time.time() - self._start_time > self.max_settle_sec:
+            self._settled = True
+            self._settle_time = time.time()
+            log.warning(f"Auto-exposure forced settle after {self.max_settle_sec}s — "
+                        f"brightness={avg_bright:.0f} variance={variance:.1f}")
+            return True
+
+        return False
+
+    @property
+    def is_settled(self) -> bool:
+        return self._settled
+
+    @property
+    def current_brightness(self) -> float:
+        return self._history[-1] if self._history else 0.0
+
+    @property
+    def status_text(self) -> str:
+        if self._settled:
+            return "EXPOSURE OK"
+        n = len(self._history)
+        bright = self._history[-1] if self._history else 0
+        return f"EXPOSURE SETTLING ({n}/{self.window_size}) bright={bright:.0f}"
 
 
 def _load_yolo():
@@ -225,6 +305,7 @@ class FOVChecker:
         t_start           = time.time()
         deadline          = t_start + total_secs
         buf               = b""
+        settler           = ExposureSettler()
 
         try:
             while time.time() < deadline and not self._cancel.is_set():
@@ -268,6 +349,21 @@ class FOVChecker:
                         np.frombuffer(data, dtype=np.uint8),
                         cv2.IMREAD_COLOR)
                     if frame is None:
+                        continue
+
+                    # Wait for auto-exposure to settle before running detection
+                    settled = settler.feed(frame)
+
+                    if not settled:
+                        # Show "settling" overlay on stream but don't count
+                        vis = frame.copy()
+                        status = settler.status_text
+                        cv2.putText(vis, status, (20, 45),
+                                    cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 4)
+                        cv2.putText(vis, status, (20, 45),
+                                    cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 180, 220), 2)
+                        if self.frame_cb:
+                            self.frame_cb(vis, False)
                         continue
 
                     detected, vis, n_wrists, method = detect_wrists(frame)
